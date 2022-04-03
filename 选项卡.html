@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        ul {
+            margin-left: 450px;
+            margin-top: 50px;
+        }
+        
+        ul li {
+            position: relative;
+            float: left;
+            width: 200px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: aqua;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all .5s linear;
+        }
+        
+        ul .active {
+            background-color: rgb(89, 21, 183);
+            color: white;
+        }
+        
+        ol li {
+            position: absolute;
+            left: 450px;
+            top: 100px;
+            width: 600px;
+            height: 400px;
+            text-align: center;
+            line-height: 400px;
+            font-size: 40px;
+            background-color: darkorange;
+            color: white;
+            display: none;
+        }
+        
+        ol .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ol>
+        <li class="active">内容一</li>
+        <li>内容二</li>
+        <li>内容三</li>
+    </ol>
+    <script>
+        var btn = document.querySelectorAll('ul>li');
+        var content = document.querySelectorAll('ol>li');
+        for (var i = 0; i < btn.length; i++) {
+            btn[i].myIndex = i;
+            btn[i].onclick = function() {
+                xianshi(this.myIndex);
+            }
+        }
+
+        function xianshi(index) {
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].className = '';
+                content[i].className = '';
+            }
+            btn[index].className = 'active';
+            content[index].className = 'active';
+        }
+    </script>
+</body>
+
+</html>

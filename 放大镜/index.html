@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .xaiohezi {
+            position: relative;
+            border: 1px solid black;
+            width: 400px;
+            height: 400px;
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background-color: aqua;
+            opacity: .5;
+            cursor: move;
+            display: none;
+        }
+        
+        .dahezi {
+            position: absolute;
+            top: 50px;
+            left: 550px;
+            border: 1px solid black;
+            width: 500px;
+            height: 500px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .dahezi .Bigimg {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="xaiohezi">
+        <div class="mask"></div>
+        <img src="r7000p01.jpg" alt="">
+    </div>
+    <div class="dahezi">
+        <img src="./r7000p.jpg" alt="" class="Bigimg">
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            var SmallBox = document.querySelector('.xaiohezi');
+            var Mask = document.querySelector('.mask');
+            var BigBox = document.querySelector('.dahezi');
+            var Bigimg = document.querySelector('.Bigimg');
+            SmallBox.addEventListener('mouseover', function() {
+                Mask.style.display = 'block';
+                BigBox.style.display = 'block';
+            });
+            SmallBox.addEventListener('mouseout', function() {
+                Mask.style.display = 'none';
+                BigBox.style.display = 'none';
+            });
+            SmallBox.addEventListener('mousemove', function(e) {
+                var left = e.clientX - SmallBox.offsetLeft;
+                var top = e.clientY - SmallBox.offsetTop;
+                var MaskX = left - Mask.offsetWidth / 2;
+                var MaskY = top - Mask.offsetHeight / 2;
+
+                if (MaskX <= 0) {
+                    MaskX = 0;
+                } else if (MaskX > SmallBox.offsetWidth - Mask.offsetWidth) {
+                    MaskX = SmallBox.offsetWidth - Mask.offsetWidth;
+                }
+                if (MaskY <= 0) {
+                    MaskY = 0;
+                } else if (MaskY > SmallBox.offsetHeight - Mask.offsetHeight) {
+                    MaskY = SmallBox.offsetHeight - Mask.offsetHeight;
+                }
+
+                Mask.style.left = MaskX + 'px';
+                Mask.style.top = MaskY + 'px';
+
+                var MaskMax = SmallBox.offsetWidth - Mask.offsetWidth;
+
+                var BigimgMax = Bigimg.offsetWidth - BigBox.offsetWidth;
+
+                var BigBoxX = MaskX * BigimgMax / MaskMax;
+                var BigBoxY = MaskY * BigimgMax / MaskMax;
+
+                Bigimg.style.left = -BigBoxX + 'px';
+                Bigimg.style.top = -BigBoxY + 'px';
+            });
+        });
+    </script>
+</body>
+
+</html>
